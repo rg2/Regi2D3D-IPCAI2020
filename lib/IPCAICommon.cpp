@@ -719,7 +719,7 @@ void xreg::RunGlobalPelvisRegi(MultiLevelMultiObjRegi* ml_mo_regi,
   vout << "computing nominal AP view to use for initialization..." << std::endl;
   const FrameTransform app_to_vol_std = AnteriorPelvicPlaneFromLandmarksMap(lands);
 
-  const bool pat_is_up = *pd.rot_to_pat_up == ProjDataF32::kZERO;
+  const bool pat_is_up = *pd.rot_to_pat_up == ProjDataRotToPatUp::kZERO;
 
   const FrameTransform cam_to_naive_ap = CreateAPViewOfAPP(pd.cam, 0.8, true, pat_is_up);
 
@@ -943,7 +943,7 @@ void xreg::RunPelvisAndFemursIntraopRegi(MultiLevelMultiObjRegi* ml_mo_regi,
 
   const bool method_2_use_posit = num_det_lands_2d >= 4;
 
-  const bool pat_is_up = *pd.rot_to_pat_up == ProjDataF32::kZERO;
+  const bool pat_is_up = *pd.rot_to_pat_up == ProjDataRotToPatUp::kZERO;
 
   const bool use_patch_wgt = (method_id == 2) || (method_id == 3);
 

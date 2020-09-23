@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
         vout << "setting rot-up field..." << std::endl;
 
         pd.rot_to_pat_up = ReadSingleScalarH5Bool("rot-180-for-up", proj_g) ?
-                                  ProjDataF32::kONE_EIGHTY : ProjDataF32::kZERO;
+                                  ProjDataRotToPatUp::kONE_EIGHTY : ProjDataRotToPatUp::kZERO;
         
         vout << "writing new projection file to disk..." << std::endl;
         WriteProjDataH5ToDisk(pd, dst_proj_path);

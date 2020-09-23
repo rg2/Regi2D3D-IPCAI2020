@@ -17,6 +17,9 @@ The following tools are provided by this repository:
     * [Projection of 3D annotations into 2D](apps/proj_3d_labels_into_2d)
   * [Intraoperative Registration](apps/intraop_pelvis_femurs_regi)
 
+Python scripts are provided ([`extract_fcsv_from_nn_csv.py`](extract_fcsv_from_nn_csv.py) and [`extract_seg_from_nn_h5.py`](extract_seg_from_nn_h5.py)) in order to extract segmentations and landmarks from CNN inferences.
+Instructions for performing CNN training and testing may be found [here](https://github.com/rg2/DeepFluoroLabeling-IPCAI2020/tree/master/train_test_code).
+
 The tools provided here rely on the [xReg library](https://github.com/rg2/xreg) and users should see the [xReg wiki](https://github.com/rg2/xreg/wiki) for details on building the software.
 
 Demonstrations detailing the usage of the tools listed above are provided on the [wiki](https://github.com/rg2/Regi2D3D-IPCAI2020/wiki) of this repository. 

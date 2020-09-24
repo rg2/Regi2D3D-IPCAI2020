@@ -1,4 +1,7 @@
 # Regi2D3D-IPCAI2020
+![Header Figure 1](https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/intraop_meth_3_pelvis_femurs_edges.gif)
+![Header Figure 2](https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/intraop_meth_3_pelvis_femurs_mov.gif)
+
 This repository contains several implementations of the 2D/3D registration strategies described in the IPCAI/IJCARS 2020 paper "Automatic Annotation of Hip Anatomy in Fluoroscopy for Robust and Efficient 2D/3D Registration."
 The paper may be found [here](https://arxiv.org/abs/1911.07042) or [here](https://doi.org/10.1007/s11548-020-02162-7).
 This repository is a companion to [DeepFluoroLabeling-IPCAI2020](https://github.com/rg2/DeepFluoroLabeling-IPCAI2020), which provides implementations of the PyTorch models and references to the entire dataset used in the IPCAI/IJCARS paper.

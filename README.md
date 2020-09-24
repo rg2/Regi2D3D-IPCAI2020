@@ -24,7 +24,7 @@ Instructions for performing CNN training and testing may be found [here](https:/
 
 The tools provided here rely on the [xReg library](https://github.com/rg2/xreg) and users should see the [xReg wiki](https://github.com/rg2/xreg/wiki) for details on building the software.
 
-Demonstrations detailing the usage of the tools listed above are provided on the [wiki](https://github.com/rg2/Regi2D3D-IPCAI2020/wiki) of this repository. 
+Demonstrations detailing the usage of the tools listed above are provided on the [wiki of this repository](https://github.com/rg2/Regi2D3D-IPCAI2020/wiki). 
 
 The tools provided here are intended to demonstrate simplified use-cases of these registration strategies.
 As such, users are encouraged to extend, modify and adapt these programs in order to conduct large scale studies efficiently.

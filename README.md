@@ -1,5 +1,5 @@
 # Regi2D3D-IPCAI2020
-<img src="https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/project_annotations.png" alt="Header Figure 1" width="447" height="154" /><img src="https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/intraop_meth_3_pelvis_femurs_edges.gif" alt="Header Figure 2" width="145" height="145" /><img src="https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/intraop_meth_3_pelvis_femurs_mov.gif" alt="Header Figure 3" width="145" height="145" />
+<img src="https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/project_annotations.png" alt="Header Figure 1" width="447" height="154" /><img src="https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/intraop_regi_spec_5_proj_50_meth_3_edges.gif" alt="Header Figure 2" width="145" height="145" /><img src="https://github.com/rg2/Regi2D3D-IPCAI2020/wiki/images/intraop_regi_spec_5_proj_50_meth_3_mov.gif" alt="Header Figure 3" width="145" height="145" />
 
 This repository contains several implementations of the 2D/3D registration strategies described in the IPCAI/IJCARS 2020 paper "Automatic Annotation of Hip Anatomy in Fluoroscopy for Robust and Efficient 2D/3D Registration."
 The paper may be found [here](https://arxiv.org/abs/1911.07042) or [here](https://doi.org/10.1007/s11548-020-02162-7).

@@ -28,9 +28,18 @@ project(xreg_ipcai_regi VERSION 2020.0.0.1)
 ###########################################
 # find all of the dependencies:
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" ${CMAKE_MODULE_PATH})
+# Note: Let find_package(xReg) determine whether OpenCL needs to be found
+# or if the ICD loader is to be used
+find_package(xreg REQUIRED)
 
-find_package(OpenCL REQUIRED)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" ${CMAKE_MODULE_PATH})
+if (XREG_USE_LEGACY_FIND_TBB)
+  set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/tbb" ${CMAKE_MODULE_PATH})
+endif ()
+
+if (XREG_USE_SYSTEM_OPENCL)
+  find_package(OpenCL REQUIRED)
+endif ()
 
 find_path(VIENNACL_INC_DIR viennacl/matrix.hpp PATHS ${ViennaCL_DIR} ${ViennaCL_DIR}/..)
 if (${VIENNACL_INC_DIR} STREQUAL "VIENNACL_INC_DIR-NOTFOUND")
@@ -54,8 +63,6 @@ include(${VTK_USE_FILE})
 find_package(OpenCV REQUIRED)
 
 find_package(NLopt REQUIRED)
-
-find_package(xreg REQUIRED)
 
 ###########################################
 

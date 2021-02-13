@@ -84,6 +84,10 @@ int main(int argc, char* argv[])
          "Do NOT convert RAS to LPS (or LPS to RAS) for the 3D landmarks; "
          "RAS to LPS conversion negates the first and second components.")
     << false;
+  
+  po.add("no-log-remap", ProgOpts::kNO_SHORT_FLAG, ProgOpts::kSTORE_TRUE, "no-log-remap",
+         "Do NOT perform log remapping of the projection intensities during pre-processing.")
+    << false;
 
   po.add_backend_flags();
 
@@ -127,6 +131,8 @@ int main(int argc, char* argv[])
   const bool ras2lps = !po.get("no-ras2lps").as_bool();
 
   const size_type proj_idx = po.get("proj-idx").as_uint32();
+  
+  const bool no_log_remap = po.get("no-log-remap");
 
   if ((regi_method_id < 1) || (regi_method_id > 3))
   {
@@ -138,8 +144,8 @@ int main(int argc, char* argv[])
   
   if ((regi_method_id > 1) && !read_proj_seg)
   {
-    std::cerr << "ERROR: must use 2D segmentation for methods 2 or 3!" << std::endl;
-    return kEXIT_VAL_BAD_USE;
+    std::cerr << "WARNING: 2D segmentation is needed for methods 2 or 3 in order to "
+                 "match IPCAI paper!" << std::endl;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -227,7 +233,8 @@ int main(int argc, char* argv[])
                                 pd, read_proj_seg ? &proj_seg : nullptr, save_debug,
                                 ProgOptsLineIntRayCasterFactory(po),
                                 ProgOptsSimMetricFactory(po),
-                                vout);
+                                vout,
+                                no_log_remap);
 
   vout << "writing pelvis regi pose to disk..." << std::endl;
   WriteITKAffineTransform(dst_pelvis_regi_pose_path, ml_mo_regi.cur_cam_to_vols[0]);

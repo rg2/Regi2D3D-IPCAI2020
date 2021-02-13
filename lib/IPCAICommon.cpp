@@ -639,10 +639,12 @@ void AddSetupForFemursAndPelvisRegi(MultiLevelMultiObjRegi* ml_mo_regi,
 
 void RunProjPreProcAndSetRegi(MultiLevelMultiObjRegi* ml_mo_regi,
                               const ProjDataF32& pd,
-                              std::ostream& vout)
+                              std::ostream& vout,
+                              const bool no_log_remap = false)
 {
   ProjPreProc proj_preproc;
   proj_preproc.params.crop_width = kPROJ_CROP_PIX;
+  proj_preproc.params.no_log_remap = no_log_remap;
 
   proj_preproc.input_projs = { pd };
 
@@ -931,7 +933,8 @@ void xreg::RunPelvisAndFemursIntraopRegi(MultiLevelMultiObjRegi* ml_mo_regi,
                                          const bool save_debug,
                                          RayCasterFactoryFn ray_cast_fact,
                                          SimMetricFactoryFn sim_metric_fact,
-                                         std::ostream& vout)
+                                         std::ostream& vout,
+                                         const bool no_log_remap)
 {
   vout << "setting up multi-level regi object.." << std::endl;
   
@@ -945,7 +948,7 @@ void xreg::RunPelvisAndFemursIntraopRegi(MultiLevelMultiObjRegi* ml_mo_regi,
 
   const bool pat_is_up = *pd.rot_to_pat_up == ProjDataRotToPatUp::kZERO;
 
-  const bool use_patch_wgt = (method_id == 2) || (method_id == 3);
+  const bool use_patch_wgt = pd_seg && ((method_id == 2) || (method_id == 3));
 
   const auto* pd_seg_to_use = pd_seg;
 
@@ -992,7 +995,7 @@ void xreg::RunPelvisAndFemursIntraopRegi(MultiLevelMultiObjRegi* ml_mo_regi,
   // calling this with save_debug==true will allocate the debug object
   ml_mo_regi->set_save_debug_info(save_debug);
 
-  RunProjPreProcAndSetRegi(ml_mo_regi, pd, vout);
+  RunProjPreProcAndSetRegi(ml_mo_regi, pd, vout, no_log_remap);
 
   ml_mo_regi->vol_names = { "Pelvis", "L. Femur", "R. Femur" };
 

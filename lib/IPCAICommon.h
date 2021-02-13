@@ -89,7 +89,8 @@ void RunPelvisAndFemursIntraopRegi(MultiLevelMultiObjRegi* ml_mo_regi,
                                    const bool save_debug,
                                    RayCasterFactoryFn ray_cast_fact,
                                    SimMetricFactoryFn sim_metric_fact,
-                                   std::ostream& vout);
+                                   std::ostream& vout,
+                                   const bool no_log_remap);
 
 }  // xreg
 

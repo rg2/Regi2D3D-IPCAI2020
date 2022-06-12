@@ -104,3 +104,35 @@ jobs:
         with:
           name: ubuntu-16.04-build
           path: regi2d3d-ipcai2020-ubuntu-16.04.tar.gz
+
+  centos_7_build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/rg2/xreg-deps-centos-7:latest
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: ./regi2d3d-ipcai2020
+      - name: Build xreg master branch
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
+        shell: bash
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+        shell: bash
+      - name: Install packages needed to create distribution file
+        run: ./xreg-git/dist/centos_dist_pkgs
+        shell: bash
+      - name: Create distribution file
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_make_dist centos-7
+        shell: bash
+      - name: Upload distribution as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: centos-7-build
+          path: regi2d3d-ipcai2020-centos-7.tar.gz

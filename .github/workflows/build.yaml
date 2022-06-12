@@ -19,23 +19,16 @@ jobs:
         with:
           repository: rg2/xreg
           path: ./xreg-git
-      - run: pwd
-        shell: bash
-      - run: ls
-        shell: bash
       - name: Checkout this repo (Regi2D3D-IPCAI2020)
         uses: actions/checkout@v2
         with:
           path: ./regi2d3d-ipcai2020
-      - run: pwd
-        shell: bash
-      - run: ls
-        shell: bash
       - name: Build xreg master branch
         run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
         shell: bash
-      #- name: Build this repo (Regi2D3D-IPCAI2020)
-      #  run: ./.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+        shell: bash
       #- run: ./dist/ubuntu_dist_pkgs
       #  shell: bash
       #- run: ./.github/workflows/linux_make_dist ubuntu-20.04

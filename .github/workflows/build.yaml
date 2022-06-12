@@ -5,6 +5,8 @@
 name: Build
 on:
   pull_request:
+  workflow_dispatch:
+  push:
 
 jobs:
   ubuntu_20_04_build:

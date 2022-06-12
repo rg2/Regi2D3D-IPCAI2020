@@ -1,0 +1,14 @@
+
+XREG_NAME="regi2d3d-ipcai2020-${1}"
+
+mkdir $XREG_NAME
+
+LD_LIBRARY_PATH="/usr/local/lib:/usr/local/lib64:/opt/tbb/lib/intel64/gcc4.7:$LD_LIBRARY_PATH" \
+    python3 ./xreg-git/make_linux_dist.py /usr/local $XREG_NAME
+
+cp ./regi2d3d-ipcai2020/README.md $XREG_NAME
+cp ./regi2d3d-ipcai2020/extract_fcsv_from_nn_csv.py $XREG_NAME
+cp ./regi2d3d-ipcai2020/extract_seg_from_nn_h5.py $XREG_NAME
+cp ./LICENSE $XREG_NAME
+
+tar czf ${XREG_NAME}.tar.gz $XREG_NAME

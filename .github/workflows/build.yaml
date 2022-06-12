@@ -179,7 +179,7 @@ jobs:
         with:
           path: ./regi2d3d-ipcai2020
       - name: Installing Ninja build tool
-      - run: brew install ninja
+        run: brew install ninja
       - name: Building xreg master branch and its dependencies
         run: XREG_INSTALL_DIR="$HOME/xreg_install" cd ./xreg-git && ./example_build_script_2
         shell: bash
@@ -193,6 +193,7 @@ jobs:
       - run: ls -a
         shell: bash
       - run: ls $HOME
+        shell: bash
       #- run: mkdir xreg-macos-10.15
       #- run: python3 ./dist/make_macos_dist.py $HOME/xreg_install xreg-macos-10.15 ../xreg_deps_install
       #- run: cp LICENSE xreg-macos-10.15 && cp ./dist/dist_readme/README.txt xreg-macos-10.15

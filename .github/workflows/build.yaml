@@ -19,6 +19,10 @@ jobs:
         with:
           repository: rg2/xreg
           path: ./xreg-git
+      - run: ls -a ./xreg-git
+        shell: bash
+      - run: ls -a ./xreg-git/.git
+        shell: bash
       - name: Checkout this repo (Regi2D3D-IPCAI2020)
         uses: actions/checkout@v2
         with:

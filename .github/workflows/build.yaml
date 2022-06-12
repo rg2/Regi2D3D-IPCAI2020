@@ -1,0 +1,34 @@
+# GitHub action to build software.
+# Linux builds include pre-built dependencies via containers.
+# The Windows and MacOS builds build dependencies each run.
+
+name: Build
+on:
+  pull_request:
+
+jobs:
+  ubuntu_20_04_build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/rg2/xreg-deps-ubuntu-20.04:latest
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+      - name: Build xreg master branch
+        run: ./.github/workflows/linux_xreg_cmake_build
+        shell: bash
+      #- name: Build this repo (Regi2D3D-IPCAI2020)
+      #  run: ./.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+      #- run: ./dist/ubuntu_dist_pkgs
+      #  shell: bash
+      #- run: ./.github/workflows/linux_make_dist ubuntu-20.04
+      #  shell: bash
+      #- uses: actions/upload-artifact@v2
+      #  with:
+      #    name: ubuntu-20.04-build
+      #    path: regi2d3d-ipcai2020-ubuntu-20.04.tar.gz

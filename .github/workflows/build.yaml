@@ -152,7 +152,7 @@ jobs:
           path: regi2d3d-ipcai2020
       - name: Setup Visual C++ environment
         uses: ilammy/msvc-dev-cmd@v1
-      - name: Build xreg master branch
+      - name: Build xreg master branch and its dependencies
         run: regi2d3d-ipcai2020\.github\workflows\win_xreg_build.cmd
         shell: cmd
       #- name: Build this repo (Regi2D3D-IPCAI2020)
@@ -164,3 +164,40 @@ jobs:
       #  with:
       #    name: win-64-build
       #    path: xreg-win64.zip
+
+  macos_build:
+    runs-on: macos-10.15
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: ./regi2d3d-ipcai2020
+      - name: Installing Ninja build tool
+      - run: brew install ninja
+      - name: Building xreg master branch and its dependencies
+        run: XREG_INSTALL_DIR="$HOME/xreg_install" cd ./xreg-git && ./example_build_script_2
+        shell: bash
+      - run: ls -a
+        shell: bash
+      - run: ls $HOME
+        shell: bash
+      - name: Building this repo
+        run: ./regi2d3d-ipcai2020/.github/workflows/mac_regi2d3d_ipcai2020_cmake_build
+        shell: bash
+      - run: ls -a
+        shell: bash
+      - run: ls $HOME
+      #- run: mkdir xreg-macos-10.15
+      #- run: python3 ./dist/make_macos_dist.py $HOME/xreg_install xreg-macos-10.15 ../xreg_deps_install
+      #- run: cp LICENSE xreg-macos-10.15 && cp ./dist/dist_readme/README.txt xreg-macos-10.15
+      #- run: tar czf xreg-macos-10.15.tar.gz xreg-macos-10.15
+      #- uses: actions/upload-artifact@v2
+      #  with:
+      #    name: macos-10.15-build
+      #    path: xreg-macos-10.15.tar.gz

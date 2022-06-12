@@ -1,0 +1,11 @@
+
+cd regi2d3d-ipcai2020
+
+mkdir build
+cd build
+
+CMAKE_PREFIX_PATH="../../xreg_deps_install:../../xreg-git/build" cmake -G Ninja -DCMAKE_INSTALL_PREFIX:PATH="$HOME/ipcai2020_install" ..
+
+cmake --build .
+
+cmake --build . --target install

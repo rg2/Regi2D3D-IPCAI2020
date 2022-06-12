@@ -32,7 +32,7 @@ jobs:
       - run: ls
         shell: bash
       - name: Build xreg master branch
-        run: ./.github/workflows/linux_xreg_cmake_build
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
         shell: bash
       #- name: Build this repo (Regi2D3D-IPCAI2020)
       #  run: ./.github/workflows/linux_regi2d3d_ipcai2020_cmake_build

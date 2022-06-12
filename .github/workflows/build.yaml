@@ -194,11 +194,16 @@ jobs:
         shell: bash
       - run: ls $HOME
         shell: bash
-      #- run: mkdir xreg-macos-10.15
-      #- run: python3 ./dist/make_macos_dist.py $HOME/xreg_install xreg-macos-10.15 ../xreg_deps_install
-      #- run: cp LICENSE xreg-macos-10.15 && cp ./dist/dist_readme/README.txt xreg-macos-10.15
-      #- run: tar czf xreg-macos-10.15.tar.gz xreg-macos-10.15
-      #- uses: actions/upload-artifact@v2
-      #  with:
-      #    name: macos-10.15-build
-      #    path: xreg-macos-10.15.tar.gz
+      - name: Creating dist directory
+        run: mkdir regi2d3d-ipcai2020-macos-10.15
+        shell: bash
+      - name: Creating distribution executables
+        run: python3 ./xreg-git/dist/make_macos_dist.py $HOME/ipcai2020_install regi2d3d-ipcai2020-macos-10.15 ./xreg_deps_install $HOME/xreg_install
+        shell: bash
+      - name: Packaging up files
+        run: ./regi2d3d-ipcai2020/.github/workflows/mac_make_dist
+        shell: bash
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macos-10.15-build
+          path: regi2d3d-ipcai2020-macos-10.15.tar.gz

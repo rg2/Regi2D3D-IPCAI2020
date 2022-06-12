@@ -1,0 +1,9 @@
+
+XREG_NAME="regi2d3d-ipcai2020-macos-10.15"
+
+cp ./regi2d3d-ipcai2020/README.md $XREG_NAME
+cp ./regi2d3d-ipcai2020/extract_fcsv_from_nn_csv.py $XREG_NAME
+cp ./regi2d3d-ipcai2020/extract_seg_from_nn_h5.py $XREG_NAME
+cp ./regi2d3d-ipcai2020/LICENSE $XREG_NAME
+
+tar czf ${XREG_NAME}.tar.gz $XREG_NAME

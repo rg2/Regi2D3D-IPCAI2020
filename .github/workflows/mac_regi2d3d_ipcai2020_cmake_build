@@ -6,7 +6,11 @@ cd regi2d3d-ipcai2020
 mkdir build
 cd build
 
-cmake -G Ninja -DCMAKE_INSTALL_PREFIX:PATH="$HOME/ipcai2020_install" ..
+cmake -G Ninja \
+    -DCMAKE_BUILD_TYPE:STRING="Release" \
+    -DBUILD_SHARED_LIBS:BOOL=OFF \
+    -DCMAKE_INSTALL_PREFIX:PATH="$HOME/ipcai2020_install" \
+    ..
 
 cmake --build .
 

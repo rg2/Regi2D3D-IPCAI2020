@@ -155,6 +155,12 @@ jobs:
       - name: Build xreg master branch and its dependencies
         run: regi2d3d-ipcai2020\.github\workflows\win_xreg_build.cmd
         shell: cmd
+      - run: dir D:\tmp
+        shell: cmd
+      - run: dir D:\tmp\xreg_build
+        shell: cmd
+      - run: dir D:\usr\local\include
+        shell: cmd
       - name: Build this repo (Regi2D3D-IPCAI2020)
         run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_build.cmd
         shell: cmd

@@ -164,12 +164,14 @@ jobs:
       - name: Build this repo (Regi2D3D-IPCAI2020)
         run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_build.cmd
         shell: cmd
-      #- run: .github\workflows\win_make_dist.cmd
-      #  shell: cmd
-      #- uses: actions/upload-artifact@v2
-      #  with:
-      #    name: win-64-build
-      #    path: xreg-win64.zip
+      - name: Create dist .zip file
+        run: .github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd
+        shell: cmd
+      - name: Upload distribution .zip file as artifact.
+        uses: actions/upload-artifact@v2
+        with:
+          name: win-64-build
+          path: regi2d3d-ipcai2020-win64.zip
 
   macos_build:
     runs-on: macos-10.15

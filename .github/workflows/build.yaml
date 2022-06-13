@@ -173,45 +173,45 @@ jobs:
           name: win-64-build
           path: regi2d3d-ipcai2020-win64.zip
 
-  macos_build:
-    runs-on: macos-10.15
-
-    steps:
-      - name: Checkout xreg repository master branch
-        uses: actions/checkout@v2
-        with:
-          repository: rg2/xreg
-          path: ./xreg-git
-      - name: Checkout this repo (Regi2D3D-IPCAI2020)
-        uses: actions/checkout@v2
-        with:
-          path: ./regi2d3d-ipcai2020
-      - name: Installing Ninja build tool
-        run: brew install ninja
-      - name: Building xreg master branch and its dependencies
-        run: XREG_INSTALL_DIR="$HOME/xreg_install" cd ./xreg-git && ./example_build_script_2
-        shell: bash
-      - run: ls -a
-        shell: bash
-      - run: ls $HOME
-        shell: bash
-      - name: Building this repo
-        run: ./regi2d3d-ipcai2020/.github/workflows/mac_regi2d3d_ipcai2020_cmake_build
-        shell: bash
-      - run: ls -a
-        shell: bash
-      - run: ls $HOME
-        shell: bash
-      - name: Creating dist directory
-        run: mkdir regi2d3d-ipcai2020-macos-10.15
-        shell: bash
-      - name: Creating distribution executables
-        run: python3 ./xreg-git/dist/make_macos_dist.py $HOME/ipcai2020_install regi2d3d-ipcai2020-macos-10.15 ./xreg_deps_install $HOME/xreg_install
-        shell: bash
-      - name: Packaging up files
-        run: ./regi2d3d-ipcai2020/.github/workflows/mac_make_dist
-        shell: bash
-      - uses: actions/upload-artifact@v2
-        with:
-          name: macos-10.15-build
-          path: regi2d3d-ipcai2020-macos-10.15.tar.gz
+  #macos_build:
+  #  runs-on: macos-10.15
+  #
+  #  steps:
+  #    - name: Checkout xreg repository master branch
+  #      uses: actions/checkout@v2
+  #      with:
+  #        repository: rg2/xreg
+  #        path: ./xreg-git
+  #    - name: Checkout this repo (Regi2D3D-IPCAI2020)
+  #      uses: actions/checkout@v2
+  #      with:
+  #        path: ./regi2d3d-ipcai2020
+  #    - name: Installing Ninja build tool
+  #      run: brew install ninja
+  #    - name: Building xreg master branch and its dependencies
+  #      run: XREG_INSTALL_DIR="$HOME/xreg_install" cd ./xreg-git && ./example_build_script_2
+  #      shell: bash
+  #    - run: ls -a
+  #      shell: bash
+  #    - run: ls $HOME
+  #      shell: bash
+  #    - name: Building this repo
+  #      run: ./regi2d3d-ipcai2020/.github/workflows/mac_regi2d3d_ipcai2020_cmake_build
+  #      shell: bash
+  #    - run: ls -a
+  #      shell: bash
+  #    - run: ls $HOME
+  #      shell: bash
+  #    - name: Creating dist directory
+  #      run: mkdir regi2d3d-ipcai2020-macos-10.15
+  #      shell: bash
+  #    - name: Creating distribution executables
+  #      run: python3 ./xreg-git/dist/make_macos_dist.py $HOME/ipcai2020_install regi2d3d-ipcai2020-macos-10.15 ./xreg_deps_install $HOME/xreg_install
+  #      shell: bash
+  #    - name: Packaging up files
+  #      run: ./regi2d3d-ipcai2020/.github/workflows/mac_make_dist
+  #      shell: bash
+  #    - uses: actions/upload-artifact@v2
+  #      with:
+  #        name: macos-10.15-build
+  #        path: regi2d3d-ipcai2020-macos-10.15.tar.gz

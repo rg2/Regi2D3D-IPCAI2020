@@ -152,7 +152,16 @@ jobs:
           path: regi2d3d-ipcai2020
       - name: Setup Visual C++ environment
         uses: ilammy/msvc-dev-cmd@v1
+      - name: Cache xreg deps and xreg build
+        id: xreg-deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            D:\usr\local
+            D:\tmp
+          key: ${{ runner.os }}-xreg-deps
       - name: Build xreg master branch and its dependencies
+        if: steps.xreg-deps.outputs.cache-hit != 'true'
         run: regi2d3d-ipcai2020\.github\workflows\win_xreg_build.cmd
         shell: cmd
       - run: dir D:\tmp

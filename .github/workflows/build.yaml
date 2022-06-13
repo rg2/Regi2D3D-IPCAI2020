@@ -191,16 +191,8 @@ jobs:
   #    - name: Building xreg master branch and its dependencies
   #      run: XREG_INSTALL_DIR="$HOME/xreg_install" cd ./xreg-git && ./example_build_script_2
   #      shell: bash
-  #    - run: ls -a
-  #      shell: bash
-  #    - run: ls $HOME
-  #      shell: bash
   #    - name: Building this repo
   #      run: ./regi2d3d-ipcai2020/.github/workflows/mac_regi2d3d_ipcai2020_cmake_build
-  #      shell: bash
-  #    - run: ls -a
-  #      shell: bash
-  #    - run: ls $HOME
   #      shell: bash
   #    - name: Creating dist directory
   #      run: mkdir regi2d3d-ipcai2020-macos-10.15

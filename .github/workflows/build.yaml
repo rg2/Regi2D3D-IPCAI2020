@@ -139,13 +139,7 @@ jobs:
 
   windows_build:
     runs-on: windows-2019
-
     steps:
-      - name: Checkout xreg repository master branch
-        uses: actions/checkout@v2
-        with:
-          repository: rg2/xreg
-          path: xreg-git
       - name: Checkout this repo (Regi2D3D-IPCAI2020)
         uses: actions/checkout@v2
         with:
@@ -157,9 +151,18 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
+            xreg-git
             D:\usr\local
-            D:\tmp
+            D:\tmp\ninja-bin
+            D:\tmp\cmake-3.22.2-windows-x86_64
+            D:\tmp\xreg_build
           key: ${{ runner.os }}-xreg-deps
+      - name: Checkout xreg repository master branch
+        if: steps.xreg-deps-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: xreg-git
       - name: Build xreg master branch and its dependencies
         if: steps.xreg-deps-cache.outputs.cache-hit != 'true'
         run: regi2d3d-ipcai2020\.github\workflows\win_xreg_build.cmd
@@ -175,14 +178,14 @@ jobs:
         shell: cmd
       - run: dir D:\usr\local\bin
         shell: cmd
-      - name: Create dist .zip file
-        run: .github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd
-        shell: cmd
-      - name: Upload distribution .zip file as artifact.
-        uses: actions/upload-artifact@v2
-        with:
-          name: win-64-build
-          path: regi2d3d-ipcai2020-win64.zip
+#      - name: Create dist .zip file
+#        run: .github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd
+#        shell: cmd
+#      - name: Upload distribution .zip file as artifact.
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: win-64-build
+#          path: regi2d3d-ipcai2020-win64.zip
 
   #macos_build:
   #  runs-on: macos-10.15

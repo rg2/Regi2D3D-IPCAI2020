@@ -15,9 +15,12 @@ cd build || EXIT /b
 cmake -G Ninja ^
     -Dxreg_DIR:PATH="%CUR_DRIVE%/tmp/xreg_build:" ^
     -DCMAKE_PREFIX_PATH:PATH="%CUR_DRIVE%/usr/local" ^
+    -DCMAKE_INSTALL_PREFIX:PATH="%CUR_DRIVE%/usr/local" ^
     -DCMAKE_CXX_STANDARD:STRING="11" ^
     -DCMAKE_BUILD_TYPE:STRING="Release" ^
     -DBUILD_SHARED_LIBS:BOOL="OFF" ^
     ..  || EXIT /b
 
 cmake --build . --config Release || EXIT /b
+
+cmake --install . || EXIT /b

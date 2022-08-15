@@ -186,7 +186,7 @@ jobs:
       - run: dir D:\usr\local\bin
         shell: cmd
       - name: Create dist .zip file
-        run: .github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd
+        run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd
         shell: cmd
       - name: Upload distribution .zip file as artifact.
         uses: actions/upload-artifact@v2

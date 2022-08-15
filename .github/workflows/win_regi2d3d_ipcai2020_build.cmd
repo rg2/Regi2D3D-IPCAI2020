@@ -2,7 +2,7 @@
 
 setlocal
 
-set CUR_DRIVE="%~d0" || EXIT /b
+set "CUR_DRIVE=%~d0" || EXIT /b
 
 set "PATH=%CUR_DRIVE%\tmp\cmake-3.22.2-windows-x86_64\bin;%CUR_DRIVE%\tmp\ninja-bin;%PATH%" || EXIT /b
 
@@ -17,9 +17,9 @@ mkdir build || EXIT /b
 cd build || EXIT /b
 
 cmake -G Ninja ^
-    -Dxreg_DIR:PATH=%XREG_BUILD_PATH% ^
-    -DCMAKE_PREFIX_PATH:PATH=%INSTALL_ROOT% ^
-    -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT% ^
+    -Dxreg_DIR:PATH="%XREG_BUILD_PATH%" ^
+    -DCMAKE_PREFIX_PATH:PATH="%INSTALL_ROOT%" ^
+    -DCMAKE_INSTALL_PREFIX:PATH="%INSTALL_ROOT%" ^
     -DCMAKE_CXX_STANDARD:STRING="11" ^
     -DCMAKE_BUILD_TYPE:STRING="Release" ^
     -DBUILD_SHARED_LIBS:BOOL="OFF" ^

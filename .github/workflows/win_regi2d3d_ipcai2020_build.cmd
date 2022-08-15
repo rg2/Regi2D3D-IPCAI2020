@@ -1,4 +1,4 @@
-@echo off
+@echo on
 
 setlocal
 
@@ -6,9 +6,9 @@ set CUR_DRIVE="%~d0" || EXIT /b
 
 set "PATH=%CUR_DRIVE%\tmp\cmake-3.22.2-windows-x86_64\bin;%CUR_DRIVE%\tmp\ninja-bin;%PATH%" || EXIT /b
 
-set "INSTALL_ROOT=%CUR_DRIVE%/usr/local" || EXIT /b
+set "INSTALL_ROOT=%CUR_DRIVE%\usr\local" || EXIT /b
 
-set "XREG_BUILD_PATH=%CUR_DRIVE%/tmp/xreg_build" || EXIT /b
+set "XREG_BUILD_PATH=%CUR_DRIVE%\tmp\xreg_build" || EXIT /b
 
 cd regi2d3d-ipcai2020 || EXIT /b
 

@@ -1,0 +1,215 @@
+# GitHub action to build software.
+# Linux builds include pre-built dependencies via containers.
+# The Windows and MacOS builds build dependencies each run.
+
+name: Build
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+
+jobs:
+  ubuntu_20_04_build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/rg2/xreg-deps-ubuntu-20.04:latest
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: ./regi2d3d-ipcai2020
+      - name: Build xreg master branch
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
+        shell: bash
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+        shell: bash
+      - name: Install packages needed to create distribution file
+        run: ./xreg-git/dist/ubuntu_dist_pkgs
+        shell: bash
+      - name: Create distribution file
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_make_dist ubuntu-20.04
+        shell: bash
+      - name: Upload distribution as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-20.04-build
+          path: regi2d3d-ipcai2020-ubuntu-20.04.tar.gz
+
+  ubuntu_18_04_build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/rg2/xreg-deps-ubuntu-18.04:latest
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: ./regi2d3d-ipcai2020
+      - name: Build xreg master branch
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
+        shell: bash
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+        shell: bash
+      - name: Install packages needed to create distribution file
+        run: ./xreg-git/dist/ubuntu_dist_pkgs
+        shell: bash
+      - name: Create distribution file
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_make_dist ubuntu-18.04
+        shell: bash
+      - name: Upload distribution as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-18.04-build
+          path: regi2d3d-ipcai2020-ubuntu-18.04.tar.gz
+
+  ubuntu_16_04_build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/rg2/xreg-deps-ubuntu-16.04:latest
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: ./regi2d3d-ipcai2020
+      - name: Build xreg master branch
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
+        shell: bash
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+        shell: bash
+      - name: Install packages needed to create distribution file
+        run: ./xreg-git/dist/ubuntu_dist_pkgs
+        shell: bash
+      - name: Create distribution file
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_make_dist ubuntu-16.04
+        shell: bash
+      - name: Upload distribution as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ubuntu-16.04-build
+          path: regi2d3d-ipcai2020-ubuntu-16.04.tar.gz
+
+  centos_7_build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/rg2/xreg-deps-centos-7:latest
+
+    steps:
+      - name: Checkout xreg repository master branch
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: ./xreg-git
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: ./regi2d3d-ipcai2020
+      - name: Build xreg master branch
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_xreg_cmake_build
+        shell: bash
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_regi2d3d_ipcai2020_cmake_build
+        shell: bash
+      - name: Install packages needed to create distribution file
+        run: ./xreg-git/dist/centos_dist_pkgs
+        shell: bash
+      - name: Create distribution file
+        run: ./regi2d3d-ipcai2020/.github/workflows/linux_make_dist centos-7
+        shell: bash
+      - name: Upload distribution as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: centos-7-build
+          path: regi2d3d-ipcai2020-centos-7.tar.gz
+
+  windows_build:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout this repo (Regi2D3D-IPCAI2020)
+        uses: actions/checkout@v2
+        with:
+          path: regi2d3d-ipcai2020
+      - name: Setup Visual C++ environment
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Cache xreg deps and xreg build
+        id: xreg-deps-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            xreg-git
+            D:\usr\local
+            D:\tmp\ninja-bin
+            D:\tmp\cmake-3.22.2-windows-x86_64
+            D:\tmp\xreg_build
+          key: ${{ runner.os }}-xreg-deps
+      - name: Checkout xreg repository master branch
+        if: steps.xreg-deps-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v2
+        with:
+          repository: rg2/xreg
+          path: xreg-git
+      - name: Build xreg master branch and its dependencies
+        if: steps.xreg-deps-cache.outputs.cache-hit != 'true'
+        run: regi2d3d-ipcai2020\.github\workflows\win_xreg_build.cmd
+        shell: cmd
+      - name: Build this repo (Regi2D3D-IPCAI2020)
+        run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_build.cmd
+        shell: cmd
+      - name: Create dist .zip file
+        run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd
+        shell: cmd
+      - name: Upload distribution .zip file as artifact.
+        uses: actions/upload-artifact@v2
+        with:
+          name: win-64-build
+          path: regi2d3d-ipcai2020-win64.zip
+
+  #macos_build:
+  #  runs-on: macos-10.15
+  #
+  #  steps:
+  #    - name: Checkout xreg repository master branch
+  #      uses: actions/checkout@v2
+  #      with:
+  #        repository: rg2/xreg
+  #        path: ./xreg-git
+  #    - name: Checkout this repo (Regi2D3D-IPCAI2020)
+  #      uses: actions/checkout@v2
+  #      with:
+  #        path: ./regi2d3d-ipcai2020
+  #    - name: Installing Ninja build tool
+  #      run: brew install ninja
+  #    - name: Building xreg master branch and its dependencies
+  #      run: XREG_INSTALL_DIR="$HOME/xreg_install" cd ./xreg-git && ./example_build_script_2
+  #      shell: bash
+  #    - name: Building this repo
+  #      run: ./regi2d3d-ipcai2020/.github/workflows/mac_regi2d3d_ipcai2020_cmake_build
+  #      shell: bash
+  #    - name: Creating dist directory
+  #      run: mkdir regi2d3d-ipcai2020-macos-10.15
+  #      shell: bash
+  #    - name: Creating distribution executables
+  #      run: python3 ./xreg-git/dist/make_macos_dist.py $HOME/ipcai2020_install regi2d3d-ipcai2020-macos-10.15 ./xreg_deps_install $HOME/xreg_install
+  #      shell: bash
+  #    - name: Packaging up files
+  #      run: ./regi2d3d-ipcai2020/.github/workflows/mac_make_dist
+  #      shell: bash
+  #    - uses: actions/upload-artifact@v2
+  #      with:
+  #        name: macos-10.15-build
+  #        path: regi2d3d-ipcai2020-macos-10.15.tar.gz

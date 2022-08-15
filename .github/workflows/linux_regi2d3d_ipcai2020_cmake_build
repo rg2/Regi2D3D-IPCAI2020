@@ -1,0 +1,14 @@
+
+export CMAKE_PREFIX_PATH=`pwd`/xreg-git/build
+
+cd regi2d3d-ipcai2020
+mkdir build
+cd build
+
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON \
+            ..
+
+cmake --build .
+
+cmake --build . --target install

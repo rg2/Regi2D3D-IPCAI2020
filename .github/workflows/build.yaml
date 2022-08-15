@@ -167,23 +167,8 @@ jobs:
         if: steps.xreg-deps-cache.outputs.cache-hit != 'true'
         run: regi2d3d-ipcai2020\.github\workflows\win_xreg_build.cmd
         shell: cmd
-      - run: dir D:\tmp
-        shell: cmd
-      - run: dir D:\tmp\xreg_build
-        shell: cmd
-      - run: dir D:\usr\local\include
-        shell: cmd
-      - name: Cache ipcai build (temporary for testing)
-        id: xreg-ipcai-cache
-        uses: actions/cache@v3
-        with:
-          path: D:\usr\local
-          key: ${{ runner.os }}-xreg-ipcai-cache
       - name: Build this repo (Regi2D3D-IPCAI2020)
-        if: steps.xreg-ipcai-cache.outputs.cache-hit != 'true'
         run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_build.cmd
-        shell: cmd
-      - run: dir D:\usr\local\bin
         shell: cmd
       - name: Create dist .zip file
         run: regi2d3d-ipcai2020\.github\workflows\win_regi2d3d_ipcai2020_make_dist.cmd

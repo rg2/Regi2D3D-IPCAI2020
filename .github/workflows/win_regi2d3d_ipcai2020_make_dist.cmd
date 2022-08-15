@@ -1,7 +1,7 @@
 REM Create a .zip of the compiled binaries
 
 REM Use the drive where this script currently resides
-SET CUR_DRIVE="%~d0"
+SET "CUR_DRIVE=%~d0"
 ECHO CUR_DRIVE = %CUR_DRIVE%
 
 REM Everything will be installed here using the standard

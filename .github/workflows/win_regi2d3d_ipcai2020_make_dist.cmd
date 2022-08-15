@@ -1,4 +1,4 @@
-echo on
+echo off
 
 REM Create a .zip of the compiled binaries
 
@@ -21,8 +21,8 @@ XCOPY /E "%INSTALL_ROOT%\bin\setup-xreg-vars.bat" "%XREG_NAME%\bin\"
 XCOPY /E "%INSTALL_ROOT%\bin\ffmpeg.exe" "%XREG_NAME%\bin\"
 XCOPY /E "%INSTALL_ROOT%\bin\xreg-ipcai-*" "%XREG_NAME%\bin\"
 
-XCOPY /E  regi2d3d-ipcai2020\README.md "%XREG_NAME%\bin\"
-XCOPY /E  regi2d3d-ipcai2020\LICENSE "%XREG_NAME%\bin\"
+XCOPY /E  regi2d3d-ipcai2020\README.md "%XREG_NAME%\"
+XCOPY /E  regi2d3d-ipcai2020\LICENSE "%XREG_NAME%\"
 
 REM GitHub runners have 7zip installed, so we will use that to create the .zip
 7z a -tzip "%XREG_NAME%.zip" "%XREG_NAME%"
